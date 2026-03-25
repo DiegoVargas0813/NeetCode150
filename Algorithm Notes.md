@@ -47,6 +47,25 @@ O(n^2) in the worst case when all elements are in the same bucket. In this case 
 
 # Searching Algorithms
 
+## [Binary Search](https://www.geeksforgeeks.org/dsa/binary-search/)
+Binary search is a searching algorithm that works on sorted arrays. It repeatedly divids the search interval in half to find the target value in O(log n) time complexity.
+
+The conditions to apply binary search are:
+1. The data must be sorted.
+2. Acces to any element in the array must be O(1), which is the case for arrays but not for linked lists.
+
+Algorithm:
+1. Dive the search space in two by finde the middle index.
+2. Comapre the middle index with the target value.
+|   - If they are equal, return the middle index.
+|   - If the key is not at the middle choose which half of the array to continue searching in.
+|       - If the key is less than the middle element, continue searching in the left half.
+|       - If the key is greater than the middle element, continue searching in the right half
+3. Repeat the process until the key is found or the search space is empty.
+
+### Non-code example
+Imagine you have a recording of a day and you want to find the time when a cup was taken from a table. You can start in the middle of the recording, if the cup is not there, it means it was taken in the first half of the day. If it is still there it means it was taken in the second half of the day. Then you can repeat this process until you find the exact time when the cup was taken.
+
 
 # [Greedy Algorithms](https://www.geeksforgeeks.org/dsa/introduction-to-greedy-algorithm-data-structures-and-algorithm-tutorials/)
 Greedy Algorithms build solutions piece by piece, always choosing the next piece that offers the most immediate benefit. They make the locally optimal choice at each step with the hope of finding a global optimum.
@@ -323,7 +342,12 @@ When a new element is pushed, it is compared with the top of the stack. If the o
 
 Imagine the plates are now based on their size, and we want to keep a decreasing order. When a plate that is to be added is larger than the top plate, we need to pop the smaller plates until we find a plate that is larger than the new one, or until the stack is empty. Then we can push the new plate on top of the stack.
 
-## Queue
+## [Queue](https://www.geeksforgeeks.org/dsa/queue-data-structure/)
+A Queue is a linear data structure that follows a particular order in which operations are performed. The order is FIFO, which stands for First In First Out. This means that the first element added to the queue will be the first one to be removed.
+
+It can be used as a buffer for when we have a speed mismatch between two divices. For example, if we have a printer that is slower than the computer sending the print jobs, we can use a queue to store the print jobs until the printer is ready to process them. This way, the computer can continue sending print jobs without having to wait for the printer to finish processing the previous job.
+
+A more common example would be making queues for waiting for a service, the cinema, the bank, etc. The first person to get in line will be the first one to be served.
 
 
 ## [Linked List](https://www.geeksforgeeks.org/dsa/linked-list-data-structure/)
@@ -383,3 +407,95 @@ A doubly linked list is a type of linked list where each node contains two point
 - Slower operations due to overhead.
 - Not cache friendly
     - Due to non-contiguous memory allocation, transversals may be slower than arrays.
+
+## [Binary Tree](https://www.geeksforgeeks.org/dsa/introduction-to-binary-tree/)
+A binary tree is a non-linear hierarchical data structure where each node has at most ***two*** children, referred to as the left child and the right child. The topmost node is called the root, and nodes with no children are called leaves.
+
+![Binary Tree](./assets/BinaryTree1.png)
+
+Each node is composed of three parts:
+1. Data
+2. Pointer to the left child
+3. Pointer to the right child
+
+### Terminology
+- Parent Node: A node that is the predecessor of another node.
+- Child Node: A node that is a successor of another node.
+- Ancestors of a node: All nodes that are on the path from the root to that node, including the node itself.
+- Descendants of a node: All node that lie in the subtree rooted at that node, including the node itself.
+- Subtree of a node: If the root node has a left child and a right child, then the left child and all its descendants form the left subtree, and the right child and all its descendants form the right subtree. And so one for the left and right child of each node.
+- Edge: The connection between a parent node and a child node.
+- Path in a binary tree: A sequence of nodes and edges connecting a node with a descendant.
+- Leaf Node: A node with no or null children.
+- Internal Node: A node with at least one child.
+- Depth/Level of a node: The number of edges from the root to the node. The root node is at depth 0, its children are at depth 1, and so on.
+- Height of a Binary Tree: The number of edges on the longest path from root to a leaf.
+
+### Properties
+1. The maximum number of nodes at level 'L' is 2^L.
+    - Example: At level 1, that being the two children of the root, we can have a maximum of 2^1 = 2 nodes. At level 2, that being the children of the children of the root, we can have a maximum of 2^2 = 4 nodes, and so on.
+2. The maximum number of nodes in a binary tree of height 'H' is 2^(H+1) - 1.
+    - Example: For a binary tree of height 2, the maximum number of nodes is 2^(2+1) - 1 = 7.
+3. Total number of leaf nodes in a binary tree = total number of nodes with 2 children + 1.
+    - Example: If we have a tree with 3 nodes with two childre, The first node of course is the root, and then the root's children are the other two nodes with two children. And if the 2 children of the root have 2 children each, then we have a total of 3 nodes with two children, which means we have a total of 3 + 1 = 4 leaf nodes.
+4. In a binary tree when N nodes, the minimum possible height or levels is log2(N)
+5. A binary tree with L leaves has at least log2(L) + 1 levels.
+
+### Operations on a binary tree
+
+#### 1. Traversal
+The process of visiting each node in a binary tree exactly once in a specific order. The three common types of traversal are:
+1. Inorder Traversal: Left, Root, Right
+2. Preorder Traversal: Root, Left, Right
+3. Postorder Traversal: Left, Right, Root
+
+Also you can do:
+1. Depth First Traversal: This can be implemented using a stack or recursion. It explores as far as possible along each branch before backtracking.
+    - So for going all left first, then all right, and then the root, we would be doing a postorder traversal.
+2. Breadth First Traversal: This can be implemented using a queue. It explores all the nodes at the present depth before moving on to the nodes at the next depth level.
+    - While in DFS we first check the children, in BFS we first check the siblings. So for going all the nodes at level 1, then all the nodes at level 2, and so on, we would be doing a breadth first traversal.
+
+In the following tree
+```
+        1
+       / \
+      2   3
+     / \
+    4   5
+```
+
+The first element checkd in DFS considering going all left would be the 4. In BFS we check first the root.
+
+
+#### 2. Search
+
+
+#### 3. Insertion and Deletion
+
+### Advantages and Disadvantages of Binary Trees
+
+Advantages:
+1. Efficient Search: Using a [Binary Search Tree](https://www.geeksforgeeks.org/dsa/binary-search-tree-data-structure/) is efficient when searching for a specific element, as each node has at mos two children, which allows for a logarithmic time complexity in the average case.
+2. Memory Efficient: Binary trees require less memory than other data structures.
+3. Binary trees are relatively easy to understand and implement, making them a good choice for many applications.
+
+Disadvantages:
+1. Limited structure: If a tree requires more than 2 children per node a different data structure would be more appropriate.
+2. Space inefficiency: Mostly because of the pointers, which can lead to increased memory usage compared to arrays.
+
+
+## [Heap](https://www.geeksforgeeks.org/dsa/heap-data-structure/)
+A heap is a complete binary tree (TODO: Section on complete binary trees) that satisfies the heap property. For every node, the value of its children is greater or equal than its own value. Heaps are usually used to implement priority queues where the smallest (or largest) element is always at the root of the tree, making it easy to access.
+
+An example of a min-heap is:
+```
+        1
+       / \
+      3   5
+     / \
+    4   8
+```
+
+In this min-heap, the value of each node is less than or equal to the values of its children. The smallest element is at the root (1), and as you go down the tree, the values increase.
+
+An real-life example would be a hospital emergency room where patients are treated based on the severity of their condition. The patient with the most severe condition (the smallest value in a min-heap or the largest value in a max-heap) is treated first, while patients with less severe conditions wait their turn.

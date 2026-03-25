@@ -289,7 +289,63 @@ public:
 4.- During second attempt, I failed to totally comprehend where my i and j pointers should be at each moment until much later. It's important to keep some form of example in mind to understand the logic behind the movement of the pointers and how they interact with each other. This is a good example of how important it is to have a clear understanding of the problem and the solution before trying to implement it, since it can lead to confusion and mistakes in the implementation.
 
 ### Solution
-Was able to solve? No, try again in some days to see if noted concepts are better understood.
+Was able to solve? Yes, although still had some problems with indexes. Would be ideal to retake the problem on my own in a few days to see if the concepts are better understood.
+
+```cpp
+class Solution {
+public:
+
+    string encode(vector<string>& strs) {
+        string result = "";
+
+        for(string s: strs){
+            result = result + to_string(s.length()) + '#' + s;
+        }
+        return result;
+    }
+
+    vector<string> decode(string s) {
+        int i = 0;
+        int j = 0;
+
+        int lenght = 0;
+
+        vector<string> result;
+
+        // While J hasn't reached the end of the string...
+        while(j < s.length()){
+            // If we reach an index with our separator.
+            // EX: 10# ->  i = 0 = '1', j = 2 = '#'
+            if(s[j] == '#'){
+                // Get a substring starting from index i ansd 
+                // Ex:  Substr strartin from 0 and goes 2 character forward.
+                cout << s.substr(i,j-i) << endl;
+                lenght = stoi(s.substr(i,j-i));
+
+                // i = j = 2
+                i = j;
+                // i = 3
+                i++;
+                // J = J + 10 = 12
+                j += lenght;
+
+                // Substr from 2 to a lenght of...
+                // j - i = 12 - 2 = 10
+                result.push_back(s.substr(i,j-i+1));
+
+                i = j;
+                i++;
+            }
+            j++;
+        }
+        return result;
+    }
+};
+```
+
+Is it optimal? Yes, time complexity is O(n) since we are iterating through the string once to decode it, and space complexity is also O(n) since we are storing the result in a vector of strings.
+
+The way the indexes are handled in the end is a little clunky and lends itself to some confusion, but the overall logic is there and it works. With some practice and retaking the problem on my own, I can improve the implementation and make it cleaner.
 
 ### Optimal solution
 ```cpp

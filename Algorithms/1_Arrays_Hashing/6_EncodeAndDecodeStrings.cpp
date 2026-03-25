@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace::std;
 
@@ -48,7 +49,7 @@ using namespace::std;
 //     }
 // };
 
-
+/*
 class Solution {
 public:
 
@@ -84,6 +85,57 @@ public:
                 result.push_back(s.substr(i, lenght));
             }
             j++; //J is being pushed even beyond the start of the next numbers.
+        }
+        return result;
+    }
+};
+*/
+
+class Solution {
+public:
+
+    string encode(vector<string>& strs) {
+        string result = "";
+
+        for(string s: strs){
+            result = result + to_string(s.length()) + '#' + s;
+        }
+        return result;
+    }
+
+    vector<string> decode(string s) {
+        int i = 0;
+        int j = 0;
+
+        int lenght = 0;
+
+        vector<string> result;
+
+        // While J hasn't reached the end of the string...
+        while(j < s.length()){
+            // If we reach an index with our separator.
+            // EX: 10# ->  i = 0 = '1', j = 2 = '#'
+            if(s[j] == '#'){
+                // Get a substring starting from index i ansd 
+                // Ex:  Substr strartin from 0 and goes 2 character forward.
+                cout << s.substr(i,j-i) << endl;
+                lenght = stoi(s.substr(i,j-i));
+
+                // i = j = 2
+                i = j;
+                // i = 3
+                i++;
+                // J = J + 10 = 12
+                j += lenght;
+
+                // Substr from 2 to a lenght of...
+                // j - i = 12 - 2 = 10
+                result.push_back(s.substr(i,j-i+1));
+
+                i = j;
+                i++;
+            }
+            j++;
         }
         return result;
     }
