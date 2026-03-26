@@ -188,7 +188,6 @@ In merge sort you can have an array [2,4] and a [3,7] that merges into [2,3,4,7]
 
 # Graph Algorithms
 
-# Tree Algorithms
 
 # String Algorithms
 
@@ -419,17 +418,17 @@ Each node is composed of three parts:
 3. Pointer to the right child
 
 ### Terminology
-- Parent Node: A node that is the predecessor of another node.
-- Child Node: A node that is a successor of another node.
-- Ancestors of a node: All nodes that are on the path from the root to that node, including the node itself.
-- Descendants of a node: All node that lie in the subtree rooted at that node, including the node itself.
-- Subtree of a node: If the root node has a left child and a right child, then the left child and all its descendants form the left subtree, and the right child and all its descendants form the right subtree. And so one for the left and right child of each node.
-- Edge: The connection between a parent node and a child node.
-- Path in a binary tree: A sequence of nodes and edges connecting a node with a descendant.
-- Leaf Node: A node with no or null children.
-- Internal Node: A node with at least one child.
-- Depth/Level of a node: The number of edges from the root to the node. The root node is at depth 0, its children are at depth 1, and so on.
-- Height of a Binary Tree: The number of edges on the longest path from root to a leaf.
+- <mark>Parent Node</mark>: A node that is the predecessor of another node.
+- <mark>Child Node</mark>: A node that is a successor of another node.
+- <mark>Ancestors of a node</mark>: All nodes that are on the path from the root to that node, including the node itself.
+- <mark>Descendants of a node</mark>: All node that lie in the subtree rooted at that node, including the node itself.
+- <mark>Subtree of a node</mark>: If the root node has a left child and a right child, then the left child and all its descendants form the left subtree, and the right child and all its descendants form the right subtree. And so one for the left and right child of each node.
+- <mark>Edge</mark>: The connection between a parent node and a child node.
+- <mark>Path in a binary tree</mark>: A sequence of nodes and edges connecting a node with a descendant.
+- <mark>Leaf Node</mark>: A node with no or null children.
+- <mark>Internal Node</mark>: A node with at least one child.
+- <mark>Depth/Level of a node</mark>: The number of edges from the root to the node. The root node is at depth 0, its children are at depth 1, and so on.
+- <mark>Height of a Binary Tree</mark>: The number of edges on the longest path from root to a leaf.
 
 ### Properties
 1. The maximum number of nodes at level 'L' is 2^L.
@@ -443,16 +442,18 @@ Each node is composed of three parts:
 
 ### Operations on a binary tree
 
-#### 1. Traversal
+#### Traversal
 The process of visiting each node in a binary tree exactly once in a specific order. The three common types of traversal are:
-1. Inorder Traversal: Left, Root, Right
-2. Preorder Traversal: Root, Left, Right
-3. Postorder Traversal: Left, Right, Root
+1. ==Preorder Traversal==: Root, Left, Right
+2. ==Inorder Traversal==: Left, Root, Right
+3. ==Postorder Traversal==: Left, Right, Root
+
+A key thing to remember these transversals is that the change comes on when is the root node is visited. In inorder the root is visited in the middle, in preorder it is visited first, and in postorder it is visited last. This have three methods have been ordered above so that the root is visited first, then in the middle, and then last. This way it is easier to remember the order of the transversals.
 
 Also you can do:
-1. Depth First Traversal: This can be implemented using a stack or recursion. It explores as far as possible along each branch before backtracking.
+1. ==Depth First Traversal== : This can be implemented using a stack or recursion. It explores as far as possible along each branch before backtracking.
     - So for going all left first, then all right, and then the root, we would be doing a postorder traversal.
-2. Breadth First Traversal: This can be implemented using a queue. It explores all the nodes at the present depth before moving on to the nodes at the next depth level.
+2. ==Breadth First Traversal== : This can be implemented using a queue. It explores all the nodes at the present depth before moving on to the nodes at the next depth level.
     - While in DFS we first check the children, in BFS we first check the siblings. So for going all the nodes at level 1, then all the nodes at level 2, and so on, we would be doing a breadth first traversal.
 
 In the following tree
@@ -467,15 +468,10 @@ In the following tree
 The first element checkd in DFS considering going all left would be the 4. In BFS we check first the root.
 
 
-#### 2. Search
-
-
-#### 3. Insertion and Deletion
-
 ### Advantages and Disadvantages of Binary Trees
 
 Advantages:
-1. Efficient Search: Using a [Binary Search Tree](https://www.geeksforgeeks.org/dsa/binary-search-tree-data-structure/) is efficient when searching for a specific element, as each node has at mos two children, which allows for a logarithmic time complexity in the average case.
+1. Efficient Search: Using a [Binary Search Tree](#binary-search-tree) is efficient when searching for a specific element, as each node has at mos two children, which allows for a logarithmic time complexity in the average case.
 2. Memory Efficient: Binary trees require less memory than other data structures.
 3. Binary trees are relatively easy to understand and implement, making them a good choice for many applications.
 
@@ -483,6 +479,37 @@ Disadvantages:
 1. Limited structure: If a tree requires more than 2 children per node a different data structure would be more appropriate.
 2. Space inefficiency: Mostly because of the pointers, which can lead to increased memory usage compared to arrays.
 
+### Non-code example
+Imagine a family tree, where each person can have at most two parents. This is a real-life example of a binary tree data structure. Each person is a node in the tree, and the edges represent the parent-child relationships. The root of the tree would be the oldest ancestor, and the leaves would be the youngest descendants.
+
+## [Binary Search Tree](https://www.geeksforgeeks.org/dsa/introduction-to-binary-search-tree/)
+A ***Binary  Search Tree (BST)*** is a type of binary tree data structure that contains unique keys and satisfies a specific ordering property:
+    - All nodes in the left subtree of a node contain vales less than the node's value.
+    - All nodes in the right subtree of a node contain values greater than the node's value.
+
+This structure allows for efficient searching, insertion and deletion of elements. Especially with a balanced tree.
+
+BSTs are commonly used in applications that require dynamic data storage and fast retrival like database indexing, symbol tables, range queries, and many more. They are used in problems where we need a sorte stream of data.
+
+![Binary Search Tree](./assets/BinarySearchTree1.png)
+
+## [Trie](https://www.geeksforgeeks.org/dsa/trie-insert-and-search/)
+The Trie, also known as a prefix tree, is used to store a set of keys represented as strings. It allows for efficient retrieval and storage of keys. Effective with large datasets.
+
+We can insert and search strings (in a dictionary) in O(n) time where n is the length of the string. Much faster than BST. Also it is faster than hashing because it does not require a hash function and does not have to deal with collisions.
+
+Also allows for easy printing of all the words in alphabetical order.
+
+Prefix search, or auto-complete, is a common application of tries. For example, when you start typing a word in a search engine, it can suggest completions based on the prefix you have typed so far. This is because the trie can quickly find all the words that start with the given prefix.
+
+The main disadvantage is memory for the strings. Since for each node we could have up to 26 children in the english alphabet. 
+
+### Representation of a Trie
+- Tries consist of nodes connected by edges.
+- Each node represents a character or a part of a string.
+- The root node acts as a starting point and does not store any character.
+
+![Trie1](./assets/Trie1.png)
 
 ## [Heap](https://www.geeksforgeeks.org/dsa/heap-data-structure/)
 A heap is a complete binary tree (TODO: Section on complete binary trees) that satisfies the heap property. For every node, the value of its children is greater or equal than its own value. Heaps are usually used to implement priority queues where the smallest (or largest) element is always at the root of the tree, making it easy to access.
@@ -498,4 +525,13 @@ An example of a min-heap is:
 
 In this min-heap, the value of each node is less than or equal to the values of its children. The smallest element is at the root (1), and as you go down the tree, the values increase.
 
+### Non-Code example     
 An real-life example would be a hospital emergency room where patients are treated based on the severity of their condition. The patient with the most severe condition (the smallest value in a min-heap or the largest value in a max-heap) is treated first, while patients with less severe conditions wait their turn.
+
+## [Graph](https://www.geeksforgeeks.org/dsa/introduction-to-graphs-data-structure-and-algorithm-tutorials/)
+
+## TODO
+
+1. [Tree balancing](https://www.geeksforgeeks.org/dsa/balanced-binary-tree/)
+2. [Graphs](https://www.geeksforgeeks.org/dsa/introduction-to-graphs-data-structure-and-algorithm-tutorials/)
+3. [Adjacency matrix and adjacency list](https://www.geeksforgeeks.org/dsa/graph-and-its-representations/)

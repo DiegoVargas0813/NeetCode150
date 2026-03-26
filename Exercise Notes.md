@@ -552,9 +552,13 @@ public:
 This problem consist on determining if a string is a palindrome, meaninng it can be read the same from both ways.
 
 ### Problems had
-1.- Issue with capital letters and spaces, had to look up how to ignore them.
-2.- Need to practice when to subtract one from functions like lenght or size to avoid out of bounds errors.
-
+1. Issue with capital letters and spaces, had to look up how to ignore them.
+2. Need to practice when to subtract one from functions like lenght or size to avoid out of bounds errors.
+3. While I had added the i < j condition in the main while loop, I forgot  to add it in the inner while loops, which could cause out of bounds errors or infinite loops.
+4. Forgetting to update the pointers at the end of comparison.
+5. One very important error I did was the following:
+    - Instead of comparing the alphanumeric values like this: (c >= 'A' && c <= 'Z'), I did ('A' <= c <= 'Z'). The  second notation is valid in SOME programming languages but not in C++. Sincer in C++ 'A' <= c is evaluated first which gives a boolean value and then that boolean value is compared to 'Z', which is not the intended logic and can lead to incorrect results. This is a common mistake when trying to compare a character to a range of characters, and it's important to remember that in C++ we need to compare the character to each boundary of the range separately.
+    
 ### Solution
 Was able to solve? No, while the core problem was understood. Implementing it gave me trouble. I will try again in a few days to see if the concepts are better understood.
 
