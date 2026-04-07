@@ -184,7 +184,48 @@ The simple question is: Can I store a result that I know will be used in the fut
 
 In merge sort you can have an array [2,4] and a [3,7] that merges into [2,3,4,7]. You will never need the [2,4] or the [3,7] again, so you don't need to store them in a table. You can simply merge them together and move on.
 
-# Backtracking
+# [Backtracking](https://www.geeksforgeeks.org/dsa/introduction-to-backtracking-2/)
+Backtracking is a problem-solving algorithm technique that involces finding a solution incrementally by trying different options and undoing them if they lead to a dead en.
+
+- It is used to explore multiple possibilities in problems such as finding a path in a maze or solving puzzles like Sudoku by trying different approaches.
+- When a choice leads to a dead end, the algorithm returns to the previous decision point and tries a different path. Avoiding exploration of invalid solutions.
+
+Backtracking is a trial and error system where the solution is built step by step and with undos whenever a dead end is hit. The idea is the following:
+
+1. Choose: Start making a choice that could lead to a solution.
+2. Explore: Recurisvely move forward with this choice.
+3. Check validity: If the choice leads to an invalid state, undo it and try another choice.
+    - This in code would be equivalent of reaching a condition where recursion is not called and just returns.
+4. Repeat: Continue until all choices have been explored or a solution is found.
+
+This ensures we don't waste time exploring paths that won't lead to a solution, making it an efficient way to solve problems with a large search space.
+
+## Non-code example
+Imagine you are trying to find your way out of a maze. You start at the entrance and choose a path to follow. If you hit a dead end, you backtrack to the last decision point and try a different path. You repeat this process until you find the exit.
+
+For a more complex example, [check the N-Queens](https://www.geeksforgeeks.org/dsa/printing-solutions-n-queen-problem/) , which is a classic problem that can be solved using backtracking. The problem is to place N queens on an N x N chessboard such that no two queens threaten each other. This means that no two queens can be in the same row, column, or diagonal. The backtracking algorithm will try placing a queen in the first row, then move to the next row and try placing another queen in a valid position. If it finds a valid position, it will move to the next row and repeat the process. If it reaches a point where it cannot place a queen in a valid position, it will backtrack to the previous row and try a different position for the queen placed there.
+
+## Backtracking vs Recursion
+| Backtracking | Recursion |
+| --- | --- |
+|     Cuts off early invalid paths when detected.  | Explores all paths regardless of validity. |
+| Control is managed using statements that determine when to backtrack. | Controle is managed by function calls and the call stack. |
+| Used for problems with a large search space where many paths can be pruned. | Used for problems that can be broken down into smaller subproblems, regardless of the search space size. |
+| Example: Solving a maze, N-Queens problem, Sudoku solver. | Example: Tree and graph transversals, Divide and Conquer, Merge Sort, Binari search, etc.
+
+## When to use backtracking
+- When you have a certain condition to satisfy. In the case of N-Queen if a path has two queen threatening each other, then we can stop exploring that path and backtrack to try a different one. Meanwhile recursion would just keep exploring.
+- When the solution space is large, but invalid branches can be pruned early.
+- When multiple solutions need to be explored.
+- When you must generate all valid combinations, permutations or subsets under a specific constraint.
+
+## When not to use backtracking
+- If the problem can be solved using greedy or DP. Since backtracking is much more intensive than these two, it is better to use them when possible.
+- When purning is not possible or effective. If you cannot cut off invalid paths early, backtracking may end up exploring the entire search space, which can be inefficient.
+- When the problem has a large input size, since the search can become exponentially large and without effective pruning, it may not be feasible to find a solution in a reasonable time frame.
+- If the task only needs one best solution with clear optimization algorithms like DP, greedy or graph search may be faster.
+
+In a way, backtracking depending the case can be seen as a brute-force but intelligently pruned. It is a systematic way to explore all possible configurations of a problem, but it does so in a way that avoids unnecessary work by cutting off paths that won't lead to a solution.
 
 # Graph Algorithms
 
@@ -209,12 +250,12 @@ Imagine a group of people, person A is friend of person B, and person B is frien
 
 With this we can imagine a different set of person D, which is friends with person E and person F. But E and F are not directly friends, but they are in the same friend group. So E and F are indirect friends by concept of being friend of a friend, thus being in the same friend group.
 
-In this case we could say this are A's and D's, we are making them the representatives of their respective sets. Then we can say that A and D are not in the same set, but B and C are in the same set as A, and E and F are in the same set as D.
+In this case we could say this are A's and D's groups, we are making them the representatives of their respective sets. Then we can say that A and D are not in the same set, but B and C are in the same set as A, and E and F are in the same set as D.
 
 So even if all of the member of the set are not directly connected to the representative, they are still in the same set because they are connected to the representative through other members of the set.
 
 ## Data Structures Used
-1. Array: In an array of integers the i'th index is a representative of the i'th item. In some way i has no representative, but is the representative of itself. So we can say that the representative of i is i, which is a common way to identify the representative in the array implementation of the disjoint set.
+1. Array: In an array of integers the i'th index is a representative of the i'th item. So we can say that the representative of i is i, which is a common way to identify the representative in the array implementation of the disjoint set.
 2. Tree: If two elements are in the same tree, then they are in the same disjoint set. The root node (or the topmost node) of each tree is the representative. 
 
 There is always a single representative for each set. A simple rule to identify the representative is if 'i' is the representative of a set, then Parent[i] = i. This means that the representative is its own parent, which is a common way to identify the representative in the array implementation of the disjoint set. In the case of a tree you can climb up the tree until you reach the root node, which is the representative of the set.
@@ -529,6 +570,8 @@ In this min-heap, the value of each node is less than or equal to the values of 
 An real-life example would be a hospital emergency room where patients are treated based on the severity of their condition. The patient with the most severe condition (the smallest value in a min-heap or the largest value in a max-heap) is treated first, while patients with less severe conditions wait their turn.
 
 ## [Graph](https://www.geeksforgeeks.org/dsa/introduction-to-graphs-data-structure-and-algorithm-tutorials/)
+
+## Extra Concepts
 
 ## TODO
 
