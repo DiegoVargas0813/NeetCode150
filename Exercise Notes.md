@@ -1302,6 +1302,7 @@ This problem consist on finding the index of a target value in a sorted array of
 1. Issues with the handling of indexes, specially considering this problem can have a lot of off by one errors. Practice more with the handling of indexes and the conditions of the loops to avoid out of bounds errors.
 2. Problems with the condition to stop the while loop, which is a common point of confusion in binary search problems. Practice more with the conditions of the loops to avoid infinite loops or missing the target value.
 3. While the core logic of the binary search was understood, implementing it gave me some trouble. Practice more with the implementation of binary search to be more efficient and less prone to errors.
+4. Was almost able to implement in second attempt, but had missed an issue in which I forgot to use our left pointer as the base for the calculation of middle. Because using middle as the base of the calculation opens itself to some edge cases where the sum added to it is 0 due to the difference of right and left pointer when divided by 2 being rounded to 0 which creates infinite loops.
 
 ### My Solution
 Was able to solve? No, some issues with the handling of indexes and the conditions of the loops.

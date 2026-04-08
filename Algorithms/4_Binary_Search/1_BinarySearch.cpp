@@ -38,6 +38,41 @@ public:
 */
 
 
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0;
+        int r = nums.size() - 1;
+        int m = 0;
+        
+        while(l < r){
+            cout << "L: " << l << endl; 
+            cout << "R: " << r << endl; 
+
+            // 0 + (5-0) / 2
+            // 2 + (5-3) / 2
+            // 3 + (5 - 4) / 2
+            // 4 + 0
+            m = l + (r-l) / 2;
+            cout << "M: " << m << endl; 
+            cout << "==== NEXT ====" << endl;
+            // m = 
+            if(nums[m] >= target){
+                    r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        if(l < nums.size() && nums[l] == target ){
+            return l;
+        }
+        return -1;
+    }
+};
+
+
+
 
 int main(){
     // 0 4
@@ -48,11 +83,11 @@ int main(){
 
 
 
-    vector<int> nums = {5};
+    vector<int> nums = {-1,0,3,5,9,12};
 
     Solution solver;
 
-    solver.search(nums, 5);
+    solver.search(nums, 9);
 
     return 0;
 }
